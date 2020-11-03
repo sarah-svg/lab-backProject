@@ -31,31 +31,52 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-  test('returns animals', async() => {
+    test('returns colors', async() => {
 
-    const expectation = [
-      {
-        'id': 1,
-        'name': 'bessie',
-        'coolfactor': 3,
-        'owner_id': 1
-      },
-      {
-        'id': 2,
-        'name': 'jumpy',
-        'coolfactor': 4,
-        'owner_id': 1
-      },
-      {
-        'id': 3,
-        'name': 'spot',
-        'coolfactor': 10,
-        'owner_id': 1
-      }
-    ];
+      const expectation = [
+        {
+          id: 1,
+          name: 'teal',
+          cool_factor: 3,  
+          owner_id: 1,
+       
+        },
+        {
+          id: 2,  
+          name: 'green',
+          cool_factor: 4, 
+          owner_id: 1,
+     
+        },
+        {
+          id: 3, 
+          name: 'blue',
+          cool_factor: 10,
+          owner_id: 1,
+       
+        }
+      ];
+
+      const data = await fakeRequest(app)
+        .get('/colors')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
+  });
+
+  test('returns a single color', async() => {
+
+    const expectation = {
+      id: 1,
+      brand: 'teal',
+      cool_factor: 3,
+      owner_id: 1
+    };
 
     const data = await fakeRequest(app)
-      .get('/animals')
+      .get('/colors/1')
       .expect('Content-Type', /json/)
       .expect(200);
 

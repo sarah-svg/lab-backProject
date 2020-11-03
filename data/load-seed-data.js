@@ -30,7 +30,7 @@ async function run() {
                     INSERT INTO colors (name, cool_factor, owner_id)
                     VALUES ($1, $2, $3);
                 `,
-        [color.name, color.cool_factor, user.id]);
+        [color.name, color.cool_factor,  user.id]);
       })
     );
     
