@@ -27,10 +27,10 @@ async function run() {
     await Promise.all(
       colors.map(color => {
         return client.query(`
-                    INSERT INTO colors (name, cool_factor, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO colors (name, cool_factor, cool, owner_id)
+                    VALUES ($1, $2, $3, $4);
                 `,
-        [color.name, color.cool_factor,  user.id]);
+        [color.name, color.cool_factor, color.cool,  user.id]);
       })
     );
     
