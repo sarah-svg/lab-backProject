@@ -156,7 +156,24 @@ describe('app routes', () => {
 
 
     });
+    test('deletes one from the color data', async() => {
+      const expectation = '';
+      const data = await fakeRequest(app)
+        .delete ('/colors/2')
+        .send({
+          id: 2
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
 
+      const deletedColor = await fakeRequest(app)
+        .get('/colors/2')
+        .expect('Content-type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+      expect(deletedColor.body);
+});
 
 
 
