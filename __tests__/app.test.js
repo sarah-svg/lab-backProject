@@ -125,7 +125,7 @@ describe('app routes', () => {
     expect(allColors.body.length).toEqual(5);
 
   });
-  test.only(' updates existing color', async() => {
+  test(' updates existing color', async() => {
     const expectation = {
       id: 1,
       name: 'yellow',
