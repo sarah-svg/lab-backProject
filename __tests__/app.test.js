@@ -91,6 +91,75 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+ 
+
+
+    test('adds a new color', async() => {
+      const expectation = {
+        id: 5,
+        name: 'orange',
+        cool: false,
+        cool_factor: 2,
+        owner_id: 1
+      };
+
+      const data = await fakeRequest(app)
+        .post('/colors')
+        .send({
+      
+          name: 'orange',
+          cool: false,
+          cool_factor: 2,
+          owner_id: 1
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      const allColors = await fakeRequest(app)
+        .get('/colors')
+
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+      expect(allColors.body.length).toEqual(5);
+
+    });
+    test(' updates existing color', async() => {
+      const expectation = {
+        id: 1,
+        name: 'yellow',
+        cool: false,
+        cool_factor: 1,
+        owner_id: 1
+
+      };
+      const data = await fakeRequest(app)
+        .put('/colors/1')
+        .send({
+          name: 'yellow',
+          cool: false,
+          cool_factor: 1,
+          owner_id: 1
+
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      const updatedColor = await fakeRequest(app)
+        .get('/colors/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+      expect(updatedColor.body);
+
+
+    });
+
+
+
+
   });
 
 });
