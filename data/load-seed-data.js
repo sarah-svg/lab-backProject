@@ -3,6 +3,7 @@ const client = require('../lib/client');
 const colors = require('./colors.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
+const levels = require('./levels.js');
 
 run();
 
@@ -21,19 +22,31 @@ async function run() {
         [user.email, user.hash]);
       })
     );
-      
-    const user = users[0].rows[0];
+///////////
+    await Promise.all(
+      levels.map(item => {
+        return client.query(`
+            INSERT INTO levels (level)
+            VALUES ($1)
+            RETURNING *;
+          `,
+        [item.level]);
+      })
+    );
 
+
+    const user = users[0].rows[0];
+////////
     await Promise.all(
       colors.map(color => {
         return client.query(`
-                    INSERT INTO colors (name, cool_factor, cool, owner_id)
+                    INSERT INTO colors (name, cool_factor_id, cool, owner_id)
                     VALUES ($1, $2, $3, $4);
                 `,
-        [color.name, color.cool_factor, color.cool,  user.id]);
+        [color.name, color.cool_factor_id, color.cool, user.id]);
       })
     );
-    
+   
 
     console.log('seed data load complete', getEmoji(), getEmoji(), getEmoji());
   }
@@ -43,5 +56,5 @@ async function run() {
   finally {
     client.end();
   }
-    
+
 }

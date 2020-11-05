@@ -9,57 +9,57 @@ const client = require('../lib/client');
 describe('app routes', () => {
   describe('routes', () => {
     //let token;
-  
+
     beforeAll(async done => {
       execSync('npm run setup-db');
-  
+
       client.connect();
-  
+
       //const signInData = await fakeRequest(app)
       ////.post('/auth/signup')
       //.send({
       // email: 'jon@user.com',
       //  password: '1234'
       /// });
-      
+
       //token = signInData.body.token;
-  
+
       return done();
     });
-  
+
     afterAll(done => {
       return client.end(done);
     });
-
-    test('returns colors', async() => {
+    //////////////////passing
+    test('returns colors', async () => {
 
       const expectation = [
         {
           id: 1,
           name: 'teal',
-          cool_factor: 3,  
+          cool_factor_id: 1,
           owner_id: 1,
           cool: true
-       
+
         },
         {
-          id: 2,  
+          id: 2,
           name: 'green',
-          cool_factor: 4, 
+          cool_factor_id: 2,
           owner_id: 1,
           cool: true
         },
         {
-          id: 3, 
+          id: 3,
           name: 'blue',
-          cool_factor: 10,
+          cool_factor_id: 3,
           owner_id: 1,
           cool: true
         },
         {
           id: 4,
           name: 'red',
-          cool_factor: 0,
+          cool_factor_id: 4,
           cool: false,
           owner_id: 1
         }
@@ -72,14 +72,14 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
-  
 
-    test('returns a single color', async() => {
+    //////////////passing
+    test('returns a single color', async () => {
 
       const expectation = {
         id: 1,
         name: 'teal',
-        cool_factor: 3,
+        cool_factor_id: 1,
         cool: true,
         owner_id: 1
       };
@@ -91,25 +91,25 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
- 
 
 
-    test('adds a new color', async() => {
+    ///////////passing
+    test('adds a new color', async () => {
       const expectation = {
         id: 5,
         name: 'orange',
+        cool_factor_id: 1,
         cool: false,
-        cool_factor: 2,
         owner_id: 1
       };
 
       const data = await fakeRequest(app)
         .post('/colors')
         .send({
-      
+
           name: 'orange',
           cool: false,
-          cool_factor: 2,
+          cool_factor_id: 1,
           owner_id: 1
         })
         .expect('Content-Type', /json/)
@@ -125,12 +125,13 @@ describe('app routes', () => {
       expect(allColors.body.length).toEqual(5);
 
     });
-    test(' updates existing color', async() => {
+    ////////////pass
+    test(' updates existing color', async () => {
       const expectation = {
         id: 1,
         name: 'yellow',
         cool: false,
-        cool_factor: 1,
+        cool_factor_id: 1,
         owner_id: 1
 
       };
@@ -139,7 +140,7 @@ describe('app routes', () => {
         .send({
           name: 'yellow',
           cool: false,
-          cool_factor: 1,
+          cool_factor_id: 1,
           owner_id: 1
 
         })
@@ -156,10 +157,11 @@ describe('app routes', () => {
 
 
     });
-    test('deletes one from the color data', async() => {
+    ////////////////////////pass
+    test('deletes one from the color data', async () => {
       const expectation = '';
       const data = await fakeRequest(app)
-        .delete ('/colors/2')
+        .delete('/colors/2')
         .send({
           id: 2
         })
@@ -173,7 +175,7 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
       expect(deletedColor.body);
-});
+    });
 
 
 
