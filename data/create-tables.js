@@ -15,14 +15,18 @@ async function run() {
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
-                    
                     hash VARCHAR(512) NOT NULL
-                );           
+                
+                );   
+                CREATE TABLE levels (
+                  id SERIAL PRIMARY KEY,
+                  level INTEGER NOT NULL
+
+              );         
                 CREATE TABLE colors (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    
-                    cool_factor INTEGER NOT NULL,
+                    cool_factor_id INTEGER NOT NULL REFERENCES levels(id),
                     cool BOOLEAN NOT NULL,
                     owner_id INTEGER NOT NULL REFERENCES users(id)
             );
