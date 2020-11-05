@@ -22,7 +22,7 @@ async function run() {
         [user.email, user.hash]);
       })
     );
-
+///////////
     await Promise.all(
       levels.map(item => {
         return client.query(`
@@ -36,7 +36,7 @@ async function run() {
 
 
     const user = users[0].rows[0];
-
+////////
     await Promise.all(
       colors.map(color => {
         return client.query(`
