@@ -31,7 +31,7 @@ describe('app routes', () => {
       return client.end(done);
     });
     //////////////////passing
-    test('returns colors', async () => {
+    test.only('returns colors', async () => {
 
       const expectation = [
         {
