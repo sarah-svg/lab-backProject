@@ -31,13 +31,13 @@ describe('app routes', () => {
       return client.end(done);
     });
     //////////////////passing
-    test.only('returns colors', async () => {
+    test('returns colors', async () => {
 
       const expectation = [
         {
           id: 1,
           name: 'teal',
-          cool_factor_id: 1,
+          coollevel: 1,
           owner_id: 1,
           cool: true
 
@@ -45,21 +45,21 @@ describe('app routes', () => {
         {
           id: 2,
           name: 'green',
-          cool_factor_id: 2,
+          coollevel: 2,
           owner_id: 1,
           cool: true
         },
         {
           id: 3,
           name: 'blue',
-          cool_factor_id: 3,
+          coollevel: 3,
           owner_id: 1,
           cool: true
         },
         {
           id: 4,
           name: 'red',
-          cool_factor_id: 4,
+          coollevel: 4,
           cool: false,
           owner_id: 1
         }
@@ -94,7 +94,7 @@ describe('app routes', () => {
 
 
     ///////////passing
-    test('adds a new color', async () => {
+    test('adds a new color', async() => {
       const expectation = {
         id: 5,
         name: 'orange',
