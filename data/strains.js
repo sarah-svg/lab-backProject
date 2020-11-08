@@ -7,7 +7,7 @@ module.exports = [
     category: 'indica',
     price: 50,
     on_sale: false,
-    supplier_id: 1
+    grower_id: 1
   },
   {
     name_id: 'girl scout cookies',
@@ -17,7 +17,7 @@ module.exports = [
     category: 'indica',
     price: 65,
     on_sale: true,
-    supplier_id: 1
+    grower_id: 1
   },
   {
     name_id: 'geleto',
@@ -27,7 +27,7 @@ module.exports = [
     category: 'hybrid',
     price: 46,
     on_sale: true,
-    supplier_id: 1
+    grower_id: 1
   },
   {
     name_id: 'blue dream',
@@ -37,7 +37,7 @@ module.exports = [
     category: 'hybrid',
     price: 75,
     on_sale: true,
-    supplier_id: 1
+    grower_id: 1
   },
 
 ];

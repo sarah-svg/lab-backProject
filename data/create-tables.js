@@ -12,9 +12,9 @@ async function run() {
 
     // run a query to create tables
     await client.query(`
-                CREATE TABLE suppliers (
+                CREATE TABLE growers (
                     id SERIAL PRIMARY KEY,
-                    supplier VARCHAR(256) NOT NULL
+                    grower VARCHAR(256) NOT NULL
                 );           
                 CREATE TABLE users (
                   id SERIAL PRIMARY KEY,
@@ -30,13 +30,13 @@ async function run() {
                     category VARCHAR(512) NOT NULL,
                     price INTEGER NOT NULL,
                     on_sale BOOLEAN NOT NULL,
-                    supplier_id INTEGER NOT NULL REFERENCES suppliers(id)
+                    grower_id INTEGER NOT NULL REFERENCES growers(id)
             );
         `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());
   }
-  catch(err) {
+  catch (err) {
     // problem? let's see the error...
     console.log(err);
   }
