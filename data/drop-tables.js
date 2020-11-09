@@ -7,20 +7,20 @@ async function run() {
 
   try {
     await client.connect();
-    
+
     await client.query(`
             DROP TABLE IF EXISTS users CASCADE;
-            DROP TABLE IF EXISTS levels CASCADE;
-            DROP TABLE IF EXISTS colors;
+            DROP TABLE IF EXISTS growers CASCADE;
+            DROP TABLE IF EXISTS strains;
         `);
 
     console.log(' drop tables complete', getEmoji(), getEmoji(), getEmoji());
   }
-  catch(err) {
+  catch (err) {
     console.log(err);
   }
   finally {
     client.end();
   }
-    
+
 }

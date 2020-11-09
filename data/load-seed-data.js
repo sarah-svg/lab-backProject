@@ -1,10 +1,9 @@
 const client = require('../lib/client');
 // import our seed data:
-const colors = require('./colors.js');
+const strains = require('./strains.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
-const levels = require('./levels.js');
-
+const companies = require('./growers.js');
 run();
 
 async function run() {
@@ -12,45 +11,46 @@ async function run() {
   try {
     await client.connect();
 
-    const users = await Promise.all(
+    await Promise.all(
       usersData.map(user => {
         return client.query(`
                       INSERT INTO users (email, hash)
                       VALUES ($1, $2)
                       RETURNING *;
                   `,
-        [user.email, user.hash]);
+          [user.email, user.hash]);
       })
     );
-///////////
+    ///////////
     await Promise.all(
-      levels.map(item => {
+      companies.map(grower => {
         return client.query(`
-            INSERT INTO levels (level)
-            VALUES ($1)
-            RETURNING *;
-          `,
-        [item.level]);
+                  INSERT INTO growers (grower)
+                  VALUES ($1)
+                  RETURNING *;
+              `,
+          [grower.grower]);
       })
     );
 
 
-    const user = users[0].rows[0];
-////////
+
+    ////////
+
     await Promise.all(
-      colors.map(color => {
+      strains.map(strains => {
         return client.query(`
-                    INSERT INTO colors (name, cool_factor_id, cool, owner_id)
-                    VALUES ($1, $2, $3, $4);
+                    INSERT INTO strains (name_id, name, image, description, category, price, on_sale, grower_id)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
                 `,
-        [color.name, color.cool_factor_id, color.cool, user.id]);
+          [strains.name_id, strains.name, strains.image, strains.description, strains.category, strains.price, strains.on_sale, strains.grower_id]);
       })
     );
-   
+
 
     console.log('seed data load complete', getEmoji(), getEmoji(), getEmoji());
   }
-  catch(err) {
+  catch (err) {
     console.log(err);
   }
   finally {
