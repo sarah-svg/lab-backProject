@@ -18,7 +18,7 @@ async function run() {
                       VALUES ($1, $2)
                       RETURNING *;
                   `,
-          [user.email, user.hash]);
+        [user.email, user.hash]);
       })
     );
     ///////////
@@ -29,7 +29,7 @@ async function run() {
                   VALUES ($1)
                   RETURNING *;
               `,
-          [grower.grower]);
+        [grower.grower]);
       })
     );
 
@@ -43,7 +43,7 @@ async function run() {
                     INSERT INTO strains (name_id, name, image, description, category, price, on_sale, grower_id)
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
                 `,
-          [strains.name_id, strains.name, strains.image, strains.description, strains.category, strains.price, strains.on_sale, strains.grower_id]);
+        [strains.name_id, strains.name, strains.image, strains.description, strains.category, strains.price, strains.on_sale, strains.grower_id]);
       })
     );
 
