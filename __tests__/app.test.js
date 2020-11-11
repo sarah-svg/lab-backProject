@@ -31,7 +31,7 @@ describe('app routes', () => {
       return client.end(done);
     });
     //////////////////passing
-    test('returns strains', async () => {
+    test('returns strains', async() => {
 
       const expectation = [
         {
@@ -111,7 +111,28 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+    ///////////////////////////////////
+    test('returns growers', async() => {
 
+      const expectation = [
+        {
+          grower: 'indoor canna company',
+          id: 1,
+        },
+        {
+          grower: 'outdoor canna company',
+          id: 2,
+        }
+  
+      ];
+
+      const data = await fakeRequest(app)
+        .get('/growers')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
 
     /////////// passing
     test('adds a new strain', async() => {
@@ -204,8 +225,8 @@ describe('app routes', () => {
 
     });
     ////////////////////////pass
-    test('deletes one from the strain data', async () => {
-      const expectation = {"category": "indica", "description": "wave of euphoria", "grower_id": 1, "id": 2, "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQiRG0_1-tlcooQymsdFdsPjsz1VyOvR3jyuw&usqp=CAU", "name": "gsc", "name_id": "girl scout cookies", "on_sale": true, "price": 65};
+    test('deletes one from the strain data', async() => {
+      const expectation = { 'category': 'indica', 'description': 'wave of euphoria', 'grower_id': 1, 'id': 2, 'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQiRG0_1-tlcooQymsdFdsPjsz1VyOvR3jyuw&usqp=CAU', 'name': 'gsc', 'name_id': 'girl scout cookies', 'on_sale': true, 'price': 65 };
       const data = await fakeRequest(app)
         .delete('/strains/2')
         .send({
